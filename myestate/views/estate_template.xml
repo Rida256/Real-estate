@@ -55,5 +55,46 @@
             <t t-set="SomeAdditionalData">Hello</t>
         </t>
     </template>
+    <template id="static_tmp" name="property">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <th>Sequence</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>State</th>
+                        </thead>
+                        <tbody>
+                            <t t-set="sequence" t-value="0" />
+                            <t t-foreach="properties" t-as="prt">
+                                <t t-set="sequence" t-value="sequence + 1" />
+                                <!-- <tr t-att-class="sequence % 2 == 0 and 'o_even' or ''"> -->
+                                <tr t-attf-style="#{sequence % 2 == 0 and 'background: grey;' or ''}">
+                                    <td>
+                                        <t t-out="sequence" />
+                                    </td>
+                                    <td>
+                                        <!-- <a t-attf-href="/course/#{course.id}"> -->
+                                        <t t-out="prt.name" />
+                                        <!-- </a> -->
+                                    </td>
+                                    <td>
+                                        <t t-if="prt.description" t-out="prt.description" />
+                                        <t t-else="">No Description Available</t>
+                                    </td>
+                                    <td>
+                                        <span t-field="prt.state" />
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+
 
 </odoo>

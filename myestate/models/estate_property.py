@@ -87,7 +87,7 @@ class EstateProperty(models.Model):
     active = fields.Boolean(default=True)
     image = fields.Image()
     property_type_id = fields.Many2one('estate.property.type')
-    salesman_id = fields.Many2one('res.users')
+    salesman_id = fields.Many2one('res.users',default = lambda self: self.env.user)
     buyer_id = fields.Many2one('res.partner')
     property_tag_ids = fields.Many2many('estate.property.tag')
     property_offer_ids = fields.One2many('estate.property.offer','property_id')
